@@ -2,6 +2,7 @@ extends Node2D
 var cardDragged : Node2D
 var offSetPickup : Vector2
 var screenSize : Vector2
+var oldPos : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screenSize = get_viewport_rect().size
@@ -12,8 +13,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if cardDragged != null : 
 		var mouse_pos =  get_global_mouse_position() + offSetPickup
+		if (oldPos == Vector2(0, 0)) : 
+			oldPos = mouse_pos
+		cardDragged._on_move_tilt(mouse_pos - oldPos)
 		cardDragged.global_position = Vector2(clamp (mouse_pos.x, 0, screenSize.x), 
 											  clamp(mouse_pos.y, 0, screenSize.y))
+		oldPos = mouse_pos
 	pass
 
 
@@ -25,6 +30,7 @@ func _input(event) :
 			if cardDragged != null : 
 				cardDragged.OnDropDown()
 				cardDragged = null
+				oldPos = Vector2(0, 0)
 	
 func raycastCheckCard():
 	var space_state = get_world_2d().direct_space_state

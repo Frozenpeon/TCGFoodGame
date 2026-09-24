@@ -3,6 +3,25 @@
 [ext_resource type="Script" uid="uid://d2ladherrjvph" path="res://Scripts/Card.gd" id="1_7k5au"]
 [ext_resource type="Texture2D" uid="uid://d02th67tco262" path="res://Assets/BackgroundCard.png" id="1_585uo"]
 [ext_resource type="Texture2D" uid="uid://blv5tqxh4g5gy" path="res://icon.svg" id="1_f3r0r"]
+[ext_resource type="Shader" uid="uid://drkyq4ml00eg0" path="res://scenes/shader_tilt.gdshader" id="2_ly5bq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wja6b"]
+resource_local_to_scene = true
+shader = ExtResource("2_ly5bq")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ly5bq"]
+resource_local_to_scene = true
+shader = ExtResource("2_ly5bq")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 8.549999989782009e-06
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eae6q"]
 size = Vector2(150, 200)
@@ -11,9 +30,11 @@ size = Vector2(150, 200)
 script = ExtResource("1_7k5au")
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1063960530]
+material = SubResource("ShaderMaterial_wja6b")
 texture = ExtResource("1_585uo")
 
 [node name="Image" type="Sprite2D" parent="." unique_id=1456819362]
+material = SubResource("ShaderMaterial_ly5bq")
 position = Vector2(-1, -37)
 scale = Vector2(0.729153, 0.729153)
 texture = ExtResource("1_f3r0r")
