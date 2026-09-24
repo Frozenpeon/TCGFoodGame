@@ -27,7 +27,6 @@ func _on_move_tilt(direction : Vector2) :
 	mat2.set_shader_parameter("x_rot", lerp(cur_x, target_x, 1.0 - exp(-smooth )))
 	mat.set_shader_parameter("y_rot", lerp(cur_y, target_y, 1.0 - exp(-smooth )))
 	mat.set_shader_parameter("x_rot", lerp(cur_x, target_x, 1.0 - exp(-smooth )))
-	print(direction)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,10 +52,9 @@ func OnDropDown() -> void:
 	mat.set_shader_parameter("x_rot", 0)
 	TweenReset()
 	TweenScale(baseScale)
-	if (s_zindex != myIndex) : 
-		self.z_index = s_zindex
-		myIndex = s_zindex
-		s_zindex = s_zindex + 1
+	self.z_index = s_zindex
+	myIndex = s_zindex
+	s_zindex = s_zindex + 1
 	
 	
 func TweenScale(targetScale : Vector2):

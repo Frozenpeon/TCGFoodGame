@@ -31,7 +31,10 @@ func _input(event) :
 				cardDragged.OnDropDown()
 				cardDragged = null
 				oldPos = Vector2(0, 0)
-	
+
+var highest_index = -1
+var card = null
+
 func raycastCheckCard():
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
@@ -40,6 +43,11 @@ func raycastCheckCard():
 	parameters.collision_mask = 1
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
-		result[0].collider.get_parent().OnPickUp()
-		cardDragged = result[0].collider.get_parent()
+		for res in result : 
+			if highest_index < res["collider"].get_parent().z_index : 
+				highest_index = res["collider"].get_parent().z_index
+				card = res["collider"].get_parent()
+		card.OnPickUp()
+		cardDragged = card
 		offSetPickup = cardDragged.global_position - get_global_mouse_position()
+		highest_index = -1
